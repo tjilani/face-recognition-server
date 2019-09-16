@@ -49,6 +49,6 @@ app.get("/profile/:id", profile.handleProfileGET(postgresDB));
 
 app.put("/image", image.handleImage(postgresDB));
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
   console.log("App is running on Port 3001");
 })
