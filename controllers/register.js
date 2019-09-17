@@ -8,7 +8,7 @@ const handleRegister = (postgresDB, bcrypt) => (req, res) => {
         return res.status(400).json('incorrect form submission');
     }
 
-    const hash = bcrypt.hashSync(password, null);
+    const hash = bcrypt.hashSync(password);
 
     postgresDB
         .transaction(trx => {
@@ -28,10 +28,8 @@ const handleRegister = (postgresDB, bcrypt) => (req, res) => {
                             joined: new Date()
                         })
                         .then(user => {
-                            console.log('then: user', user);
-                            res.json(user);
+                            res.json(user[0]);
                         })
-                        .catch('error in transaction');
                 })
                 .then(trx.commit)
                 .catch(trx.rollback);
