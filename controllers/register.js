@@ -28,8 +28,10 @@ const handleRegister = (postgresDB, bcrypt) => (req, res) => {
                             joined: new Date()
                         })
                         .then(user => {
+                            console.log('then: user', user);
                             res.json(user);
-                        });
+                        })
+                        .catch('error in transaction');
                 })
                 .then(trx.commit)
                 .catch(trx.rollback);
